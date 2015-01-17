@@ -83,17 +83,18 @@ Modules used in/by MachinePlayer:
         Implemented in: GameBoard
         Methods:
             /**
-            * isValid() determines if a particular move is valid on "this" GameBoard.
+            * isValidMove() determines if a particular move is valid on "this" GameBoard.
             *
             * @param m is a Move object which could come from any player playing the game
             * @param side is the side (0 or 1) representing either the black or white side of the player respectively
             * @return false if move is invalid and violates the 4 rules of a valid move (and prints error message)
             *         true otherwise
             **/
-            public boolean isValid(Move m, int side) {}
+            public boolean isValidMove(Move m, int side) {}
 
     Update/return the state of a GameBoard (including generating a list of valid moves based on the currently places
         chips on the board)
+        Implemented in: GameBoard
         Methods:
             /**
             * listOfValidMoves() Generates and returns a list of all valid moves on "this" GameBoard
@@ -102,18 +103,18 @@ Modules used in/by MachinePlayer:
             public List listOfValidMoves() {}
 
     Finding chips (of the same color) that form connections with a particular chip
-        Implemented in: GameBoard
+        Implemented in: GameChip
         Methods:
             /**
             * listOfConnectedChips() Generates and returns a list of all chips currently connected with a particular
-            * GameChip on "this" GameBoard.
+            * "this" GameChip on a particular GameBoard.
             * @param c is a GameChip object
             * @return a list of all possible GameChip objects connected to this chip
             **/
-            public List listOfConnectedChips(GameChip c) {}
+            public List listOfConnectedChips() {}
 
     Determine whether a game board contains any networks for a given player (most difficult)
-        Implemented in: MachinePlayer
+        Implemented in: GameBoard
         Methods:
             /**
             * networkFound() tells you whether a valid network has been found on "this" GameBoard for a particular

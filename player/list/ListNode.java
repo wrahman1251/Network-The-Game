@@ -1,6 +1,6 @@
 /* ListNode.java */
 
-package list;
+package player.list;
 
 /**
  *  A ListNode is a mutable node in a list.  No implementation is provided.

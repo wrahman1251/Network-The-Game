@@ -1,4 +1,4 @@
-package list;
+package player.list;
 
 /**
  *  A List is a mutable list ADT.  No implementation is provided.

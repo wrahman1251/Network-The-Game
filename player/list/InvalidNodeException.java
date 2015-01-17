@@ -1,6 +1,6 @@
 /* InvalidNodeException.java */
 
-package list;
+package player.list;
 
 /**
  * Implements an exception that signals when an invalid node is being attempted to be used.

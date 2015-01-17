@@ -2,6 +2,8 @@
 
 package player;
 
+import player.list.*;
+
 /**
  *  An implementation of an automatic Network player.  Keeps track of moves
  *  made by both players.  Can select a move for itself.
@@ -47,5 +49,27 @@ public class MachinePlayer extends Player {
   public boolean forceMove(Move m) {
     return false;
   }
+
+    /**
+     * This method assigns a score to a particular GameBoard giving the likelihood of winning the game from
+     * this point onward.
+     * @param g is the GameBoard object we are evaluating with the evaluation function.
+     * @return a double that indicates how good the chances are of winning. The more positive the number, the
+     *         better the chances are of winning.
+     **/
+    public double evaluationFunction(GameBoard g) {
+        return 5.00;
+    }
+
+    /**
+     * This algorithm recursively searches through a GameBoard, many moves down the line (specified by
+     * MachinePlayer's searchDepth parameter) to return to you the move with the greatest likelihood of winning.
+     * @param g is the GameBoard upon which you are implementing the tree search to see which move the computer
+     *          should make next in order to increase its odds of winning.
+     * @return a Move object that the MachinePlayer will use as its next move.
+     **/
+    public Move minimaxTreeSearch(GameBoard g) {
+        return new Move();
+    }
 
 }
