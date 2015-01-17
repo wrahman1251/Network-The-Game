@@ -1,37 +1,35 @@
-/* GameChip.java */
+/* DListNode.java */
 
 package player.list;
 
-import player.*;
-
 /**
- * This is a GameChip object implemented as a node for a doubly linked list
- */
+ *  A DListNode is a mutable node in a DList (doubly-linked list).
+ **/
 
+public class DListNode extends ListNode {
 
-public class GameChip extends ListNode {
-    protected GameBoard myList;
+    protected DList myList;
 
     /**
      *  (inherited)  item references the item stored in the current node.
      *  (inherited)  myList references the List that contains this node.
-     *  prev references the previous node in the GameBoard.
-     *  next references the next node in the GameBoard.
+     *  prev references the previous node in the DList.
+     *  next references the next node in the DList.
      *
      *  DO NOT CHANGE THE FOLLOWING FIELD DECLARATIONS.
      **/
 
-    protected GameChip prev;
-    protected GameChip next;
+    protected DListNode prev;
+    protected DListNode next;
 
     /**
-     *  GameChip() constructor.
+     *  DListNode() constructor.
      *  @param i the item to store in the node.
      *  @param l the list this node is in.
      *  @param p the node previous to this node.
      *  @param n the node following this node.
      */
-    GameChip(Object i, GameBoard l, GameChip p, GameChip n) {
+    protected DListNode(Object i, DList l, DListNode p, DListNode n) {
         item = i;
         myList = l;
         prev = p;
@@ -100,9 +98,9 @@ public class GameChip extends ListNode {
         // Your solution here.  Will look something like your Homework 4 solution,
         //   but changes are necessary.  For instance, there is no need to check if
         //   "this" is null.  Remember that this node's "myList" field tells you
-        //   what GameBoard it's in.  You should use myList.newNode() to create the
+        //   what DList it's in.  You should use myList.newNode() to create the
         //   new node.
-        next.prev = ((GameBoard)myList).newNode(item, myList, this, next);
+        next.prev = ((DList)myList).newNode(item, myList, this, next);
         next = next.prev;
         myList.size++;
     }
@@ -123,7 +121,7 @@ public class GameChip extends ListNode {
         // Your solution here.  Will look something like your Homework 4 solution,
         //   but changes are necessary.  For instance, there is no need to check if
         //   "this" is null.  Remember that this node's "myList" field tells you
-        //   what GameBoard it's in.  You should use myList.newNode() to create the
+        //   what DList it's in.  You should use myList.newNode() to create the
         //   new node.
         prev.next = myList.newNode(item, myList, prev, this);
         prev = prev.next;
@@ -131,7 +129,7 @@ public class GameChip extends ListNode {
     }
 
     /**
-     *  remove() removes this node from its GameBoard.  If this node is invalid,
+     *  remove() removes this node from its DList.  If this node is invalid,
      *  throws an exception.
      *
      *  @exception InvalidNodeException if this node is not valid.
@@ -145,7 +143,7 @@ public class GameChip extends ListNode {
         // Your solution here.  Will look something like your Homework 4 solution,
         //   but changes are necessary.  For instance, there is no need to check if
         //   "this" is null.  Remember that this node's "myList" field tells you
-        //   what GameBoard it's in.
+        //   what DList it's in.
 
         prev.next = next;
         next.prev = prev;
@@ -157,21 +155,6 @@ public class GameChip extends ListNode {
         // Set other references to null to improve garbage collection.
         next = null;
         prev = null;
-    }
-
-
-    /**
-     * Below this line are those methods which are specific to the game
-     */
-
-    /**
-     * listOfConnectedChips() Generates and returns a list of all chips currently connected with a particular
-     * "this" GameChip on a particular GameBoard.
-     * @param c is a GameChip object
-     * @return a list of all possible GameChip objects connected to this chip
-     **/
-    public Move[] listOfConnectedChips() {
-        return new Move[10];
     }
 
 }

@@ -1,17 +1,16 @@
-/* GameBoard.java */
+/* DList.java */
 
 package player.list;
 
-import player.*;
-
-
-
 /**
- * This is a GameBoard object implemented as a doubly linked list
- */
+ *  A DList is a mutable doubly-linked list ADT.  Its implementation is
+ *  circularly-linked and employs a sentinel node at the head of the list.
+ *
+ *  DO NOT CHANGE ANY METHOD PROTOTYPES IN THIS FILE.
+ **/
 
+public class DList extends List {
 
-public class GameBoard extends List {
     /**
      *  (inherited)  size is the number of items in the list.
      *  head references the sentinel node.
@@ -21,27 +20,27 @@ public class GameBoard extends List {
      *  DO NOT CHANGE THE FOLLOWING FIELD DECLARATION.
      **/
 
-    protected GameChip head;
+    protected DListNode head;
 
   /* DList invariants:
    *  1)  head != null.
-   *  2)  For every GameChip x in a DList, x.next != null.
-   *  3)  For every GameChip x in a DList, x.prev != null.
-   *  4)  For every GameChip x in a DList, if x.next == y, then y.prev == x.
-   *  5)  For every GameChip x in a DList, if x.prev == y, then y.next == x.
+   *  2)  For every DListNode x in a DList, x.next != null.
+   *  3)  For every DListNode x in a DList, x.prev != null.
+   *  4)  For every DListNode x in a DList, if x.next == y, then y.prev == x.
+   *  5)  For every DListNode x in a DList, if x.prev == y, then y.next == x.
    *  6)  For every DList l, l.head.myList = null.  (Note that l.head is the
    *      sentinel.)
-   *  7)  For every GameChip x in a DList l EXCEPT l.head (the sentinel),
+   *  7)  For every DListNode x in a DList l EXCEPT l.head (the sentinel),
    *      x.myList = l.
-   *  8)  size is the number of GameChips, NOT COUNTING the sentinel,
+   *  8)  size is the number of DListNodes, NOT COUNTING the sentinel,
    *      that can be accessed from the sentinel (head) by a sequence of
    *      "next" references.
    **/
 
     /**
-     *  newNode() calls the GameChip constructor.  Use this method to allocate
-     *  new GameChips rather than calling the GameChip constructor directly.
-     *  That way, only this method need be overridden if a subclass of GameBoard
+     *  newNode() calls the DListNode constructor.  Use this method to allocate
+     *  new DListNodes rather than calling the DListNode constructor directly.
+     *  That way, only this method need be overridden if a subclass of DList
      *  wants to use a different kind of node.
      *
      *  @param item the item to store in the node.
@@ -49,15 +48,15 @@ public class GameBoard extends List {
      *  @param prev the node previous to this node.
      *  @param next the node following this node.
      **/
-    protected GameChip newNode(Object item, GameBoard list,
-                                GameChip prev, GameChip next) {
-        return new GameChip(item, list, prev, next);
+    protected DListNode newNode(Object item, DList list,
+                                DListNode prev, DListNode next) {
+        return new DListNode(item, list, prev, next);
     }
 
     /**
-     *  GameBoard() constructs for an empty GameBoard.
+     *  DList() constructs for an empty DList.
      **/
-    public GameBoard() {
+    public DList() {
         // Your solution here.  Similar to Homework 4, but now you need to specify
         //   the `list' field (second parameter) as well.
         // head = newNode(null, null, head, head); WRONG WAY TO DO THIS since head = null when you set it as prev & next
@@ -67,7 +66,7 @@ public class GameBoard extends List {
     }
 
     /**
-     *  insertFront() inserts an item at the front of this GameBoard.
+     *  insertFront() inserts an item at the front of this DList.
      *
      *  @param item is the item to be inserted.
      *
@@ -82,7 +81,7 @@ public class GameBoard extends List {
     }
 
     /**
-     *  insertBack() inserts an item at the back of this GameBoard.
+     *  insertBack() inserts an item at the back of this DList.
      *
      *  @param item is the item to be inserted.
      *
@@ -97,13 +96,13 @@ public class GameBoard extends List {
     }
 
     /**
-     *  front() returns the node at the front of this GameBoard.  If the GameBoard is
+     *  front() returns the node at the front of this DList.  If the DList is
      *  empty, return an "invalid" node--a node with the property that any
      *  attempt to use it will cause an exception.  (The sentinel is "invalid".)
      *
      *  DO NOT CHANGE THIS METHOD.
      *
-     *  @return a ListNode at the front of this GameBoard.
+     *  @return a ListNode at the front of this DList.
      *
      *  Performance:  runs in O(1) time.
      */
@@ -112,13 +111,13 @@ public class GameBoard extends List {
     }
 
     /**
-     *  back() returns the node at the back of this GameBoard.  If the GameBoard is
+     *  back() returns the node at the back of this DList.  If the DList is
      *  empty, return an "invalid" node--a node with the property that any
      *  attempt to use it will cause an exception.  (The sentinel is "invalid".)
      *
      *  DO NOT CHANGE THIS METHOD.
      *
-     *  @return a ListNode at the back of this GameBoard.
+     *  @return a ListNode at the back of this DList.
      *
      *  Performance:  runs in O(1) time.
      */
@@ -127,17 +126,17 @@ public class GameBoard extends List {
     }
 
     /**
-     *  toString() returns a String representation of this GameBoard.
+     *  toString() returns a String representation of this DList.
      *
      *  DO NOT CHANGE THIS METHOD.
      *
-     *  @return a String representation of this GameBoard.
+     *  @return a String representation of this DList.
      *
      *  Performance:  runs in O(n) time, where n is the length of the list.
      */
     public String toString() {
         String result = "[  ";
-        GameChip current = head.next;
+        DListNode current = head.next;
         while (current != head) {
             result = result + current.item + "  ";
             current = current.next;
@@ -196,7 +195,7 @@ public class GameBoard extends List {
     }
 
     private static void testEmpty() {
-        List l = new GameBoard();
+        List l = new DList();
         System.out.println("An empty list should be [  ]: " + l);
         System.out.println("l.isEmpty() should be true: " + l.isEmpty());
         System.out.println("l.length() should be 0: " + l.length());
@@ -212,7 +211,7 @@ public class GameBoard extends List {
 
     public static void main(String[] argv) {
         testEmpty();
-        List l = new GameBoard();
+        List l = new DList();
         l.insertFront(new Integer(3));
         l.insertFront(new Integer(2));
         l.insertFront(new Integer(1));
@@ -261,43 +260,4 @@ public class GameBoard extends List {
             System.err.println ("Aborting the testing code.");
         }
     }
-
-
-    /**
-     * Below this line are those methods which are specific to the game
-     */
-
-
-    /**
-     * isValidMove() determines if a particular move is valid on "this" GameBoard.
-     *
-     * @param m is a Move object which could come from any player playing the game
-     * @param side is the side (0 or 1) representing either the black or white side of the player respectively
-     * @return false if move is invalid and violates the 4 rules of a valid move (and prints error message)
-     *         true otherwise
-     **/
-    public boolean isValidMove(Move m, int side) {
-        return false;
-    }
-
-    /**
-     * listOfValidMoves() Generates and returns a list of all valid moves on "this" GameBoard
-     * @return a List of all possible moves allowed by the current state of the GameBoard
-     **/
-    public List listOfValidMoves() {
-        return new GameBoard();
-    }
-
-    /**
-     * networkFound() tells you whether a valid network has been found on "this" GameBoard for a particular
-     * player on side 0 or 1 (black or white).
-     * @param side is an integer 0 or 1 that picks which side player you are checking to see whether they have
-     *        a valid and completed network.
-     * @return either true or false for whether a player has a completed network or not.
-     **/
-    public boolean networkFound(int side) {
-        return false;
-    }
-
-
 }
