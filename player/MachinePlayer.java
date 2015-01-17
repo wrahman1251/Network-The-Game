@@ -8,14 +8,21 @@ package player;
  */
 public class MachinePlayer extends Player {
 
+    int color;
+    int searchDepth;
+
   // Creates a machine player with the given color.  Color is either 0 (black)
   // or 1 (white).  (White has the first move.)
   public MachinePlayer(int color) {
+      this.color = color;
+      searchDepth = 3; // will change this later
   }
 
   // Creates a machine player with the given color and search depth.  Color is
   // either 0 (black) or 1 (white).  (White has the first move.)
   public MachinePlayer(int color, int searchDepth) {
+      this.color = color;
+      this.searchDepth = searchDepth;
   }
 
   // Returns a new move by "this" player.  Internally records the move (updates

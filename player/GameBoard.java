@@ -1,4 +1,0 @@
-/* GameBoard.java */
-
-package player;
-

@@ -64,9 +64,11 @@ project.  Your design of classes and interfaces will be worth 10% of your
 grade.
 
 Classes:
-    GameBoard
+    GameBoard extends List
 
-    MachinePlayer (is subclass of Player)
+    GameChip extends ListNode (includes attribute saying where on the board the chip is)
+
+    MachinePlayer extends Player
 
     Move
 
@@ -76,31 +78,103 @@ Classes:
 
     ListNode
 
-    DList extends List
-
-    DListNode extends ListNode
-
 Modules used in/by MachinePlayer:
     Determine if a move is valid.
         Implemented in: GameBoard
+        Methods:
+            /**
+            * isValid() determines if a particular move is valid on "this" GameBoard.
+            *
+            * @param m is a Move object which could come from any player playing the game
+            * @param side is the side (0 or 1) representing either the black or white side of the player respectively
+            * @return false if move is invalid and violates the 4 rules of a valid move (and prints error message)
+            *         true otherwise
+            **/
+            public boolean isValid(Move m, int side) {}
 
-    Generate a list of all valid moves
-        Implemented in: GameBoard
+    Update/return the state of a GameBoard (including generating a list of valid moves based on the currently places
+        chips on the board)
+        Methods:
+            /**
+            * listOfValidMoves() Generates and returns a list of all valid moves on "this" GameBoard
+            * @return a List of all possible moves allowed by the current state of the GameBoard
+            **/
+            public List listOfValidMoves() {}
 
     Finding chips (of the same color) that form connections with a particular chip
         Implemented in: GameBoard
+        Methods:
+            /**
+            * listOfConnectedChips() Generates and returns a list of all chips currently connected with a particular
+            * GameChip on "this" GameBoard.
+            * @param c is a GameChip object
+            * @return a list of all possible GameChip objects connected to this chip
+            **/
+            public List listOfConnectedChips(GameChip c) {}
 
     Determine whether a game board contains any networks for a given player (most difficult)
-        Implemented in: GameBoard
+        Implemented in: MachinePlayer
+        Methods:
+            /**
+            * networkFound() tells you whether a valid network has been found on "this" GameBoard for a particular
+            * player on side 0 or 1 (black or white).
+            * @param side is an integer 0 or 1 that picks which side player you are checking to see whether they have
+            *        a valid and completed network.
+            * @return either true or false for whether a player has a completed network or not.
+            **/
+            public boolean networkFound(int side) {}
 
     Compute an evaluation function for a board (possibly difficult)
-        Implemented in: GameBoard
+        Implemented in: MachinePlayer
+        Methods:
+            /**
+            * This method assigns a score to a particular GameBoard giving the likelihood of winning the game from
+            * this point onward.
+            * @param g is the GameBoard object we are evaluating with the evaluation function.
+            * @return a double that indicates how good the chances are of winning. The more positive the number, the
+            *         better the chances are of winning.
+            **/
+            public double evaluationFunction(GameBoard g) {}
 
     Perform minimax tree search (difficult)
-        Implemented in: GameBoard
+        Implemented in: MachinePlayer
+        Methods:
+            /**
+            * This algorithm recursively searches through a GameBoard, many moves down the line (specified by
+            * MachinePlayer's searchDepth parameter) to return to you the move with the greatest likelihood of winning.
+            * @param g is the GameBoard upon which you are implementing the tree search to see which move the computer
+            *          should make next in order to increase its odds of winning.
+            * @return a Move object that the MachinePlayer will use as its next move.
+            **/
+            public Move minimaxTreeSearch(GameBoard g) {}
 
-    Generate list of all coordinates detailing the location of each chip
-        Implemented in: GameBoard
 
-    Update GameBoard with completed move
-        Implemented in: GameBoard
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
