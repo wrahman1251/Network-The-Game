@@ -11,8 +11,17 @@ import player.list.*;
 
 public class GameChip extends DListNode {
 
-    GameChip(Object i, DList l, DListNode p, DListNode n) {
+    int color;
+    GameBoard myGameBoard;
+    int xPosition;
+    int yPosition;
+
+    protected GameChip(Object i, DList l, DListNode p, DListNode n, GameBoard g, int x, int y) {
         super(i, l, p, n);
+        myGameBoard = g;
+        color = myGameBoard.color();
+        xPosition = x;
+        yPosition = y;
     }
 
 
