@@ -60,7 +60,7 @@ public class DList extends List {
         // Your solution here.  Similar to Homework 4, but now you need to specify
         //   the `list' field (second parameter) as well.
         // head = newNode(null, null, head, head); WRONG WAY TO DO THIS since head = null when you set it as prev & next
-        head = newNode(null, null, null, null);
+        head = newNode(null, this, null, null);
         head.prev = head;
         head.next = head;
     }

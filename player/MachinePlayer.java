@@ -12,7 +12,7 @@ public class MachinePlayer extends Player {
 
     int color;
     int searchDepth;
-    GameBoard g;
+    protected GameBoard g;
 
   // Creates a machine player with the given color.  Color is either 0 (black)
   // or 1 (white).  (White has the first move.)
@@ -33,18 +33,23 @@ public class MachinePlayer extends Player {
   // Returns a new move by "this" player.  Internally records the move (updates
   // the internal game board) as a move by "this" player.
   public Move chooseMove() {
-      List list = g.listOfValidMoves();
+
+      List list = g.listOfValidMoves(); // From the internal GameBoard, gets a list of possible moves player can make
       try {
-          Move ourMove = (Move) list.front().item();
-          if (ourMove.moveKind == Move.ADD && color == 0) {
-              g.usedBlackGameChips += 1;
-          } else if (ourMove.moveKind == Move.ADD && color == 1) {
-              g.usedWhiteGameChips += 1;
+          if (list.front().isValidNode()) {
+              Move ourMove = (Move) list.front().item(); // chooses move based on first valid move possible on list
+              if (ourMove.moveKind == Move.ADD && color == 0) { // updating number of your chips on the board
+                  g.usedBlackGameChips += 1;
+              } else if (ourMove.moveKind == Move.ADD && color == 1) { // updating number of your chips on the board
+                  g.usedWhiteGameChips += 1;
+              }
+              return ourMove;
           }
-          return ourMove;
+
       } catch (InvalidNodeException e) {
           System.err.println(e);
       }
+
       return new Move();
   } 
 
@@ -53,11 +58,7 @@ public class MachinePlayer extends Player {
   // illegal, returns false without modifying the internal state of "this"
   // player.  This method allows your opponents to inform you of their moves.
   public boolean opponentMove(Move m) {
-      if(side == 0) {
-          if (g.isValid(m, 1)) {
-
-          }
-      }
+      return false;
   }
 
   // If the Move m is legal, records the move as a move by "this" player

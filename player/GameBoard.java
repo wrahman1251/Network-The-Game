@@ -11,13 +11,13 @@ import player.list.*;
 
 public class GameBoard {
 
-    private DList chips_currently_on_board;
-    private int color;
+    protected GameChipList chips_currently_on_board;
+    protected int color;
     int usedWhiteGameChips;
     int usedBlackGameChips;
 
     GameBoard(int color, int whiteChips, int blackChips) {
-        chips_currently_on_board = new DList();
+        chips_currently_on_board = new GameChipList();
         this.color = color;
         usedWhiteGameChips = whiteChips;
         usedBlackGameChips = blackChips;
@@ -27,8 +27,8 @@ public class GameBoard {
         return color;
     }
 
-    public recordMoveOnBoard(Move m) {
-        chips_currently_on_board.insertBack()
+    public void recordMoveOnBoard(Move m) {
+        //chips_currently_on_board.insertBack()
     }
 
     /**
@@ -40,16 +40,19 @@ public class GameBoard {
      *         true otherwise
      **/
     public boolean isValidMove(Move m, int side) {
+
+        ListNode node = chips_currently_on_board.front();
+
         if ((m.x1 == 0 && m.y1 == 0) | (m.x1 == 7 && m.y1 == 0) | (m.x1 == 0 && m.y1 == 7) |
                 (m.x1 == 7 && m.y1 == 7)) { //if move is adding to a corner of the grid
             return false;
         } else if ((side == 0 && (m.x1 == 0 | m.x1 == 7)) | (side == 1 && (m.y1 == 0 | m.y1 == 7))) { //wrong goal area
             return false;
-        } else { // checks if space in grid is already occupied
-            ListNode node = chips_currently_on_board.front();
+        } else if (node.isValidNode()) { // checks if space in grid is already occupied
+
             for (int k = 0; k < chips_currently_on_board.length(); k++) {
                 try {
-                    if (((GameChip)node.item()).xPosition == m.x1 && ((GameChip)node.item()).yPosition == m.y1) {
+                    if (((GameChip)node.item()).xPosition() == m.x1 && ((GameChip)node.item()).yPosition() == m.y1) {
                     return false;
                     }
                 } catch (InvalidNodeException e) {
@@ -65,16 +68,17 @@ public class GameBoard {
             }
         }
 
-        return true;
+        return false;
     }
 
     /**
-     * listOfValidMoves() Generates and returns a list of all valid Moves on "this" MachinePlayer can execute
+     * listOfValidMoves() Generates and returns a GameChipList of all valid Moves on "this" board that a MachinePlayer
+     * can execute.
      * @return a List of all possible moves allowed by the current state of the GameBoard
      **/
     public List listOfValidMoves() {
         // return new DList();
-        List result = new DList();
+        List result = new GameChipList(); // create a new empty GameChipList
 
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
@@ -84,16 +88,18 @@ public class GameBoard {
                         result.insertBack(aMove);
                     }
                 } else {  // Only STEP moves
-                    GameChip node = (GameChip)chips_currently_on_board.front();
-                    for (int k = 0; k < chips_currently_on_board.length(); k++) {
-                        Move aMove = new Move(i, j, node.xPosition, node.yPosition);
-                        if (isValidMove(aMove, color)) {
-                            result.insertBack(aMove);
-                        }
-                        try {
-                            node = (GameChip) node.next();
-                        } catch (InvalidNodeException e) {
-                            System.err.println(e);
+                    ListNode node = (GameChip)chips_currently_on_board.front();
+                    if (node.isValidNode()) {
+                        for (int k = 0; k < chips_currently_on_board.length(); k++) {
+                            Move aMove = new Move(i, j, ((GameChip)node).xPosition(), ((GameChip)node).yPosition());
+                            if (isValidMove(aMove, color)) {
+                                result.insertBack(aMove);
+                            }
+                            try {
+                                node = node.next();
+                            } catch (InvalidNodeException e) {
+                                System.err.println(e);
+                            }
                         }
                     }
                 }
@@ -101,6 +107,7 @@ public class GameBoard {
         }
 
         return result;
+
     }
 
     /**
