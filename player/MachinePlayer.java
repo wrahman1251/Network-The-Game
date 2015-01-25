@@ -4,6 +4,8 @@ package player;
 
 import player.list.*;
 
+import java.lang.System;
+
 /**
  *  An implementation of an automatic Network player.  Keeps track of moves
  *  made by both players.  Can select a move for itself.
@@ -33,8 +35,7 @@ public class MachinePlayer extends Player {
   // Returns a new move by "this" player.  Internally records the move (updates
   // the internal game board) as a move by "this" player.
   public Move chooseMove() {
-
-      List list = g.listOfValidMoves(); // From the internal GameBoard, gets a list of possible moves player can make
+      DList list = g.listOfValidMoves(); // From the internal GameBoard, gets a list of possible moves player can make
       try {
           if (list.front().isValidNode()) {
               Move ourMove = (Move) list.front().item(); // chooses move based on first valid move possible on list

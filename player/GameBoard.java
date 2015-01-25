@@ -68,7 +68,7 @@ public class GameBoard {
             }
         }
 
-        return false;
+        return true;
     }
 
     /**
@@ -76,27 +76,28 @@ public class GameBoard {
      * can execute.
      * @return a List of all possible moves allowed by the current state of the GameBoard
      **/
-    public List listOfValidMoves() {
+    public DList listOfValidMoves() {
         // return new DList();
-        List result = new GameChipList(); // create a new empty GameChipList
+        DList result = new DList(); // create a new empty GameChipList
+        Move aMove;
 
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
                 if ((color == 1 && usedWhiteGameChips < 10) | (color == 0 && usedBlackGameChips < 10)) {  // Only ADD Moves
-                    Move aMove = new Move(i, j);
-                    if (isValidMove(aMove, color)) {
+                    aMove = new Move(i, j);
+                    if (isValidMove(new Move(i, j), color)) {
                         result.insertBack(aMove);
                     }
                 } else {  // Only STEP moves
-                    ListNode node = (GameChip)chips_currently_on_board.front();
+                    DListNode node = (GameChip)chips_currently_on_board.front();
                     if (node.isValidNode()) {
                         for (int k = 0; k < chips_currently_on_board.length(); k++) {
-                            Move aMove = new Move(i, j, ((GameChip)node).xPosition(), ((GameChip)node).yPosition());
+                            aMove = new Move(i, j, ((GameChip)node).xPosition(), ((GameChip)node).yPosition());
                             if (isValidMove(aMove, color)) {
                                 result.insertBack(aMove);
                             }
                             try {
-                                node = node.next();
+                                node = (DListNode) node.next();
                             } catch (InvalidNodeException e) {
                                 System.err.println(e);
                             }
