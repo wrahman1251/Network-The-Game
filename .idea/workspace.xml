@@ -1,18 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="78f2e870-d8dd-494d-a4e7-4240b5963060" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/player/list/GameChipList.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/player/list/GameChipList.java" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/player/GameBoard.class" afterPath="$PROJECT_DIR$/player/GameBoard.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/player/list/GameChip.class" afterPath="$PROJECT_DIR$/player/list/GameChip.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/player/MachinePlayer.class" afterPath="$PROJECT_DIR$/player/MachinePlayer.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GRADER.txt" afterPath="$PROJECT_DIR$/GRADER.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/player/GameBoard.java" afterPath="$PROJECT_DIR$/player/GameBoard.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/player/list/GameChip.java" afterPath="$PROJECT_DIR$/player/list/GameChip.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/player/MachinePlayer.java" afterPath="$PROJECT_DIR$/player/MachinePlayer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="78f2e870-d8dd-494d-a4e7-4240b5963060" name="Default" comment="" />
     <ignored path="Network-The-Game.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -467,12 +456,12 @@
       <changelist id="78f2e870-d8dd-494d-a4e7-4240b5963060" name="Default" comment="" />
       <created>1421191015522</created>
       <updated>1421191015522</updated>
-      <workItem from="1421191015757" duration="61614000" />
+      <workItem from="1421191015757" duration="61739000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="61614000" />
+    <option name="totallyTimeSpent" value="61739000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="8" y="23" width="1260" height="736" extended-state="0" />
