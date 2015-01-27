@@ -35,15 +35,11 @@ public class MachinePlayer extends Player {
   // Returns a new move by "this" player.  Internally records the move (updates
   // the internal game board) as a move by "this" player.
   public Move chooseMove() {
-      DList list = g.listOfValidMoves(); // From the internal GameBoard, gets a list of possible moves player can make
+      List list = g.listOfValidMoves(); // From the internal GameBoard, gets a list of possible moves player can make
       try {
           if (list.front().isValidNode()) {
               Move ourMove = (Move) list.front().item(); // chooses move based on first valid move possible on list
-              if (ourMove.moveKind == Move.ADD && color == 0) { // updating number of your chips on the board
-                  g.usedBlackGameChips += 1;
-              } else if (ourMove.moveKind == Move.ADD && color == 1) { // updating number of your chips on the board
-                  g.usedWhiteGameChips += 1;
-              }
+              g.recordMoveOnBoard(ourMove, color);
               return ourMove;
           }
 
@@ -59,6 +55,17 @@ public class MachinePlayer extends Player {
   // illegal, returns false without modifying the internal state of "this"
   // player.  This method allows your opponents to inform you of their moves.
   public boolean opponentMove(Move m) {
+      int opponentColor;
+      if (color == 0) {
+          opponentColor = 1;
+      } else {
+          opponentColor = 0;
+      }
+
+      if (g.isValidMove(m, opponentColor)) {
+          g.recordMoveOnBoard(m, opponentColor);
+          return true;
+      }
       return false;
   }
 

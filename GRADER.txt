@@ -102,6 +102,15 @@ Modules used in/by MachinePlayer:
             **/
             public List listOfValidMoves() {}
 
+            /**
+            * recordMoveOnBoard() updates the GameBoard object with a chip based on where the Move m
+            * places the chip.
+            * @param m
+            * @param side
+            * @return a List of GameChip objects which can be queried using List methods
+            */
+            public void recordMoveOnBoard(Move m, int color)
+
     Finding chips (of the same color) that form connections with a particular chip
         Implemented in: GameChip
         Methods:

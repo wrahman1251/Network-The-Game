@@ -10,7 +10,7 @@ import player.*;
  */
 
 
-public class GameChip extends DListNode {
+public class GameChip {
 
     int color;
     int xPosition;
@@ -24,11 +24,10 @@ public class GameChip extends DListNode {
      * @param p is the GameChip that is previous to "this GameChip.
      * @param n is the GameChip that is next from "this" GameChip.
      */
-    protected GameChip(int[] i, GameChipList l, GameChip p, GameChip n) {
-        super(i, l, p, n);
-        this.color = i[0];
-        xPosition = i[1];
-        yPosition = i[2];
+    public GameChip(int color, int x, int y) {
+        this.color = color;
+        xPosition = x;
+        yPosition = y;
     }
 
 
