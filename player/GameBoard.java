@@ -207,6 +207,110 @@ public class GameBoard {
     }
 
     /**
+     * listOfConnectedChips() Generates and returns a list of all chips currently connected with a particular
+     * "this" GameChip on a particular GameBoard.
+     * @param c is a GameChip object
+     * @return a list of all possible GameChip objects connected to this chip
+     **/
+    public GameChip[] listOfConnectedChips(GameChip c) {
+        GameChip[] connectedChips = new GameChip[10];
+        ListNode node = chips_currently_on_board.front();
+        for (int j = 0; j < chips_currently_on_board.length(); j++) {
+            // 8 loops going through every direction to see if there is a match
+            for (int i = 1; i < 9; i++) {
+                if (c.xPosition() + i == ((GameChip) node.item()).xPosition() && c.yPosition() ==
+                        ((GameChip) node.item()).yPosition()) {
+                    if (((GameChip) node.item()).color() == c.color()) {
+                        connectedChips[connectedChips.length] = ((GameChip) node.item());
+                        break;
+                    } else {
+                        break;
+                    }
+                }
+            }
+            for (i = 1; i < 9; i++) {
+                if (c.xPosition() == ((GameChip) node.item()).xPosition() && c.yPosition() + i ==
+                        ((GameChip) node.item()).yPosition()) {
+                    if (((GameChip) node.item()).color() == c.color()) {
+                        connectedChips[connectedChips.length] = ((GameChip) node.item());
+                        break;
+                    } else {
+                        break;
+                    }
+                }
+            }
+            for (i = 1; i < 9; i++) {
+                if (c.xPosition() - i == ((GameChip) node.item()).xPosition() && c.yPosition() ==
+                        ((GameChip) node.item()).yPosition()) {
+                    if (((GameChip) node.item()).color() == c.color()) {
+                        connectedChips[connectedChips.length] = ((GameChip) node.item());
+                        break;
+                    } else {
+                        break;
+                    }
+                }
+            }
+            for (i = 1; i < 9; i++) {
+                if (c.xPosition() == ((GameChip) node.item()).xPosition() && c.yPosition() - i ==
+                        ((GameChip) node.item()).yPosition()) {
+                    if (((GameChip) node.item()).color() == c.color()) {
+                        connectedChips[connectedChips.length] = ((GameChip) node.item());
+                        break;
+                    } else {
+                        break;
+                    }
+                }
+            }
+            for (i = 1; i < 9; i++) {
+                if (c.xPosition() + i == ((GameChip) node.item()).xPosition() && c.yPosition() + i ==
+                        ((GameChip) node.item()).yPosition()) {
+                    if (((GameChip) node.item()).color() == c.color()) {
+                        connectedChips[connectedChips.length] = ((GameChip) node.item());
+                        break;
+                    } else {
+                        break;
+                    }
+                }
+            }
+            for (i = 1; i < 9; i++) {
+                if (c.xPosition() + i == ((GameChip) node.item()).xPosition() && c.yPosition() - i ==
+                        ((GameChip) node.item()).yPosition()) {
+                    if (((GameChip) node.item()).color() == c.color()) {
+                        connectedChips[connectedChips.length] = ((GameChip) node.item());
+                        break;
+                    } else {
+                        break;
+                    }
+                }
+            }
+            for (i = 1; i < 9; i++) {
+                if (c.xPosition() - i == ((GameChip) node.item()).xPosition() && c.yPosition() + i ==
+                        ((GameChip) node.item()).yPosition()) {
+                    if (((GameChip) node.item()).color() == c.color()) {
+                        connectedChips[connectedChips.length] = ((GameChip) node.item());
+                        break;
+                    } else {
+                        break;
+                    }
+                }
+            }
+            for (i = 1; i < 9; i++) {
+                if (c.xPosition() - i == ((GameChip) node.item()).xPosition() && c.yPosition() - i ==
+                        ((GameChip) node.item()).yPosition()) {
+                    if (((GameChip) node.item()).color() == c.color()) {
+                        connectedChips[connectedChips.length] = ((GameChip) node.item());
+                        break;
+                    } else {
+                        break;
+                    }
+                }
+            }
+            node = node.next();
+        }
+        return connectedChips;
+    }
+
+    /**
      * networkFound() tells you whether a valid network has been found on "this" GameBoard for a particular
      * player on side 0 or 1 (black or white).
      * @param side is an integer 0 or 1 that picks which side player you are checking to see whether they have

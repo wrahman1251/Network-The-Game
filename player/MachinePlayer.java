@@ -117,7 +117,7 @@ public class MachinePlayer extends Player {
         } else if (g.networkFound(opponentColor)) {
             return -10.00;
         } else {
-
+            return 5.00;
         }
     }
 
