@@ -42,6 +42,7 @@ public class GameChip {
      * @return a list of all possible GameChip objects connected to this chip
      **/
     public Move[] listOfConnectedChips() {
+        // Use a switch statement to iteratively search through for connected chips in all 8 possible directions
         return new Move[10];
     }
 
@@ -77,6 +78,16 @@ public class GameChip {
      */
     public int color() {
         return color;
+    }
+
+    public String toString() {
+        String side;
+        if (color == 0) {
+            side = "Black";
+        } else {
+            side = "White";
+        }
+        return side + " GameChip @ x = " + xPosition + ", y = " + yPosition;
     }
 
 }

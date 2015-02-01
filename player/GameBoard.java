@@ -11,7 +11,7 @@ import player.list.*;
 
 public class GameBoard {
 
-    protected DList chips_currently_on_board;
+    public DList chips_currently_on_board;
     protected int color;
     int usedWhiteGameChips;
     int usedBlackGameChips;
@@ -34,7 +34,6 @@ public class GameBoard {
      * @param side
      * @return a List of GameChip objects which can be queried using List methods
      **/
-    public void rec
     public void recordMoveOnBoard(Move m, int color) {
         if (m.moveKind == Move.ADD) {
             //chips_currently_on_board.insertBack()
@@ -215,7 +214,7 @@ public class GameBoard {
      * @return either true or false for whether a player has a completed network or not.
      **/
     public boolean networkFound(int side) {
-        return false;
+        return true;
     }
 
 

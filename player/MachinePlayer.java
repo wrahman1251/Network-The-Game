@@ -11,8 +11,10 @@ import java.lang.System;
  *  made by both players.  Can select a move for itself.
  */
 public class MachinePlayer extends Player {
+    int recursionDepthCounter = 0;
 
     int color;
+    int opponentColor;
     int searchDepth;
     protected GameBoard g;
 
@@ -20,6 +22,11 @@ public class MachinePlayer extends Player {
   // or 1 (white).  (White has the first move.)
   public MachinePlayer(int color) {
       this.color = color;
+      if (color == 1) {
+          opponentColor = 0;
+      } else {
+          opponentColor = 1;
+      }
       searchDepth = 3; // will change this later
       g = new GameBoard(color, 0, 0);
   }
@@ -28,6 +35,11 @@ public class MachinePlayer extends Player {
   // either 0 (black) or 1 (white).  (White has the first move.)
   public MachinePlayer(int color, int searchDepth) {
       this.color = color;
+      if (color == 1) {
+          opponentColor = 0;
+      } else {
+          opponentColor = 1;
+      }
       this.searchDepth = searchDepth;
       g = new GameBoard(color, 0, 0);
   }
@@ -55,12 +67,6 @@ public class MachinePlayer extends Player {
   // illegal, returns false without modifying the internal state of "this"
   // player.  This method allows your opponents to inform you of their moves.
   public boolean opponentMove(Move m) {
-      int opponentColor;
-      if (color == 0) {
-          opponentColor = 1;
-      } else {
-          opponentColor = 0;
-      }
 
       if (g.isValidMove(m, opponentColor)) {
           g.recordMoveOnBoard(m, opponentColor);
@@ -74,7 +80,29 @@ public class MachinePlayer extends Player {
   // illegal, returns false without modifying the internal state of "this"
   // player.  This method is used to help set up "Network problems" for your
   // player to solve.
-  public boolean forceMove(Move m) { return false; }
+  public boolean forceMove(Move m) {
+      if (g.isValidMove(m, color)) {
+          g.recordMoveOnBoard(m, color);
+          return true;
+      } else {
+          return false;
+      }
+  }
+
+    public void undoMove(Move m) {
+        ListNode node = g.chips_currently_on_board.front();
+        for (int i = 0; i < g.chips_currently_on_board.length(); i++) {
+            try {
+                if (((GameChip) node.item()).xPosition() == m.x1 && ((GameChip) node.item()).yPosition() == m.y1) {
+                    node.remove();
+                    break;
+                }
+                node = node.next();
+            } catch (InvalidNodeException e) {
+                System.err.println(e);
+            }
+        }
+    }
 
     /**
      * This method assigns a score to a particular GameBoard giving the likelihood of winning the game from
@@ -84,7 +112,13 @@ public class MachinePlayer extends Player {
      *         better the chances are of winning.
      **/
     public double evaluationFunction(GameBoard g) {
-        return 5.00;
+        if (g.networkFound(color)) {
+            return 10.00;
+        } else if (g.networkFound(opponentColor)) {
+            return -10.00;
+        } else {
+
+        }
     }
 
     /**
@@ -94,9 +128,94 @@ public class MachinePlayer extends Player {
      *          should make next in order to increase its odds of winning.
      * @return a Move object that the MachinePlayer will use as its next move.
      **/
-    public Move minimaxTreeSearch(GameBoard g) {
-        return new Move();
+    public Best minimaxTreeSearch(GameBoard g, int side, double alpha, double beta) {
+
+        Best myBest = new Best();
+        Best reply;
+        if (g.networkFound(0) | g.networkFound(1)) {
+            myBest.score = evaluationFunction(g);
+            return myBest;
+        }
+        if (color == side) {
+            myBest.score = alpha;
+        } else {
+            myBest.score = beta;
+        }
+        try {
+            myBest.move = (Move) g.listOfValidMoves().front().item();
+            ListNode node = g.listOfValidMoves().front();
+            while (recursionDepthCounter <= searchDepth) {
+                for (int i = 0; i < g.listOfValidMoves().length(); i++) {
+                    forceMove((Move) node.item());
+                    recursionDepthCounter++;
+                    reply = minimaxTreeSearch(g, opponentColor, alpha, beta); // how do we incorporate recursive depth here?
+                    undoMove((Move) node.item());
+                    if (side == color && reply.score > myBest.score) {
+                        myBest.move = (Move) node.item();
+                        myBest.score = reply.score;
+                        alpha = reply.score;
+                    } else if (side == opponentColor && reply.score < myBest.score) {
+                        myBest.move = (Move) node.item();
+                        myBest.score = reply.score;
+                        beta = reply.score;
+                    }
+                    if (alpha >= beta) {
+                        return myBest;
+                    }
+
+                    node = node.next();
+                }
+            }
+        } catch (InvalidNodeException e) {
+            System.err.println(e);
+        }
+        recursionDepthCounter = 0;
+        return myBest;
+    }
+
+    public static void main(String[] args) {
+        MachinePlayer mp = new MachinePlayer(0);
+        Move m = new Move(3, 6);
+        Move m1 = new Move(5, 5);
+        Move m2 = new Move(2, 4);
+        mp.g.recordMoveOnBoard(m, 0);
+        mp.g.recordMoveOnBoard(m1, 1);
+        mp.g.recordMoveOnBoard(m2, 0);
+        System.out.println("Adding 3 moves to a GameBoard");
+        System.out.println(mp.g.chips_currently_on_board.toString());
+        mp.undoMove(m1);
+        System.out.println("undoMove the second move from the GameBoard");
+        System.out.println(mp.g.chips_currently_on_board.toString());
+        System.out.println("undoMove the first move from the GameBoard");
+        mp.undoMove(m);
+        System.out.println(mp.g.chips_currently_on_board.toString());
+
+        mp.undoMove(m2);
+        mp.g.recordMoveOnBoard(m, 0);
+        mp.g.recordMoveOnBoard(m1, 1);
+        mp.g.recordMoveOnBoard(m2, 0);
+        System.out.println("Adding back removed moves to GameBoard");
+        System.out.println(mp.g.chips_currently_on_board.toString());
+        System.out.println(mp.minimaxTreeSearch(mp.g, mp.color, -1, 1).toString());
     }
 
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
