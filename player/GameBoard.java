@@ -212,100 +212,104 @@ public class GameBoard {
      * @param c is a GameChip object
      * @return a list of all possible GameChip objects connected to this chip
      **/
-    public GameChip[] listOfConnectedChips(GameChip c) {
-        GameChip[] connectedChips = new GameChip[10];
+    public List listOfConnectedChips(GameChip c) {
+        List connectedChips = new DList();
         ListNode node = chips_currently_on_board.front();
-        for (int j = 0; j < chips_currently_on_board.length(); j++) {
-            // 8 loops going through every direction to see if there is a match
-            for (int i = 1; i < 9; i++) {
-                if (c.xPosition() + i == ((GameChip) node.item()).xPosition() && c.yPosition() ==
-                        ((GameChip) node.item()).yPosition()) {
-                    if (((GameChip) node.item()).color() == c.color()) {
-                        connectedChips[connectedChips.length] = ((GameChip) node.item());
-                        break;
-                    } else {
-                        break;
+        try {
+            for (int j = 0; j < chips_currently_on_board.length(); j++) {
+                // 8 loops going through every direction to see if there is a match
+                for (int i = 1; i < 9; i++) {
+                    if (c.xPosition() + i == ((GameChip) node.item()).xPosition() && c.yPosition() ==
+                            ((GameChip) node.item()).yPosition()) {
+                        if (((GameChip) node.item()).color() == c.color()) {
+                            ((DList)connectedChips).insertFront(((GameChip) node.item()));
+                            break;
+                        } else {
+                            break;
+                        }
                     }
                 }
-            }
-            for (i = 1; i < 9; i++) {
-                if (c.xPosition() == ((GameChip) node.item()).xPosition() && c.yPosition() + i ==
-                        ((GameChip) node.item()).yPosition()) {
-                    if (((GameChip) node.item()).color() == c.color()) {
-                        connectedChips[connectedChips.length] = ((GameChip) node.item());
-                        break;
-                    } else {
-                        break;
+                for (int i = 1; i < 9; i++) {
+                    if (c.xPosition() == ((GameChip) node.item()).xPosition() && c.yPosition() + i ==
+                            ((GameChip) node.item()).yPosition()) {
+                        if (((GameChip) node.item()).color() == c.color()) {
+                            ((DList)connectedChips).insertFront(((GameChip) node.item()));
+                            break;
+                        } else {
+                            break;
+                        }
                     }
                 }
-            }
-            for (i = 1; i < 9; i++) {
-                if (c.xPosition() - i == ((GameChip) node.item()).xPosition() && c.yPosition() ==
-                        ((GameChip) node.item()).yPosition()) {
-                    if (((GameChip) node.item()).color() == c.color()) {
-                        connectedChips[connectedChips.length] = ((GameChip) node.item());
-                        break;
-                    } else {
-                        break;
+                for (int i = 1; i < 9; i++) {
+                    if (c.xPosition() - i == ((GameChip) node.item()).xPosition() && c.yPosition() ==
+                            ((GameChip) node.item()).yPosition()) {
+                        if (((GameChip) node.item()).color() == c.color()) {
+                            ((DList)connectedChips).insertFront(((GameChip) node.item()));
+                            break;
+                        } else {
+                            break;
+                        }
                     }
                 }
-            }
-            for (i = 1; i < 9; i++) {
-                if (c.xPosition() == ((GameChip) node.item()).xPosition() && c.yPosition() - i ==
-                        ((GameChip) node.item()).yPosition()) {
-                    if (((GameChip) node.item()).color() == c.color()) {
-                        connectedChips[connectedChips.length] = ((GameChip) node.item());
-                        break;
-                    } else {
-                        break;
+                for (int i = 1; i < 9; i++) {
+                    if (c.xPosition() == ((GameChip) node.item()).xPosition() && c.yPosition() - i ==
+                            ((GameChip) node.item()).yPosition()) {
+                        if (((GameChip) node.item()).color() == c.color()) {
+                            ((DList)connectedChips).insertFront(((GameChip) node.item()));
+                            break;
+                        } else {
+                            break;
+                        }
                     }
                 }
-            }
-            for (i = 1; i < 9; i++) {
-                if (c.xPosition() + i == ((GameChip) node.item()).xPosition() && c.yPosition() + i ==
-                        ((GameChip) node.item()).yPosition()) {
-                    if (((GameChip) node.item()).color() == c.color()) {
-                        connectedChips[connectedChips.length] = ((GameChip) node.item());
-                        break;
-                    } else {
-                        break;
+                for (int i = 1; i < 9; i++) {
+                    if (c.xPosition() + i == ((GameChip) node.item()).xPosition() && c.yPosition() + i ==
+                            ((GameChip) node.item()).yPosition()) {
+                        if (((GameChip) node.item()).color() == c.color()) {
+                            ((DList)connectedChips).insertFront(((GameChip) node.item()));
+                            break;
+                        } else {
+                            break;
+                        }
                     }
                 }
-            }
-            for (i = 1; i < 9; i++) {
-                if (c.xPosition() + i == ((GameChip) node.item()).xPosition() && c.yPosition() - i ==
-                        ((GameChip) node.item()).yPosition()) {
-                    if (((GameChip) node.item()).color() == c.color()) {
-                        connectedChips[connectedChips.length] = ((GameChip) node.item());
-                        break;
-                    } else {
-                        break;
+                for (int i = 1; i < 9; i++) {
+                    if (c.xPosition() + i == ((GameChip) node.item()).xPosition() && c.yPosition() - i ==
+                            ((GameChip) node.item()).yPosition()) {
+                        if (((GameChip) node.item()).color() == c.color()) {
+                            ((DList)connectedChips).insertFront(((GameChip) node.item()));
+                            break;
+                        } else {
+                            break;
+                        }
                     }
                 }
-            }
-            for (i = 1; i < 9; i++) {
-                if (c.xPosition() - i == ((GameChip) node.item()).xPosition() && c.yPosition() + i ==
-                        ((GameChip) node.item()).yPosition()) {
-                    if (((GameChip) node.item()).color() == c.color()) {
-                        connectedChips[connectedChips.length] = ((GameChip) node.item());
-                        break;
-                    } else {
-                        break;
+                for (int i = 1; i < 9; i++) {
+                    if (c.xPosition() - i == ((GameChip) node.item()).xPosition() && c.yPosition() + i ==
+                            ((GameChip) node.item()).yPosition()) {
+                        if (((GameChip) node.item()).color() == c.color()) {
+                            ((DList)connectedChips).insertFront(((GameChip) node.item()));
+                            break;
+                        } else {
+                            break;
+                        }
                     }
                 }
-            }
-            for (i = 1; i < 9; i++) {
-                if (c.xPosition() - i == ((GameChip) node.item()).xPosition() && c.yPosition() - i ==
-                        ((GameChip) node.item()).yPosition()) {
-                    if (((GameChip) node.item()).color() == c.color()) {
-                        connectedChips[connectedChips.length] = ((GameChip) node.item());
-                        break;
-                    } else {
-                        break;
+                for (int i = 1; i < 9; i++) {
+                    if (c.xPosition() - i == ((GameChip) node.item()).xPosition() && c.yPosition() - i ==
+                            ((GameChip) node.item()).yPosition()) {
+                        if (((GameChip) node.item()).color() == c.color()) {
+                            ((DList)connectedChips).insertFront(((GameChip) node.item()));
+                            break;
+                        } else {
+                            break;
+                        }
                     }
                 }
+                node = node.next();
             }
-            node = node.next();
+        } catch (InvalidNodeException e) {
+            System.err.println(e);
         }
         return connectedChips;
     }
@@ -318,7 +322,12 @@ public class GameBoard {
      * @return either true or false for whether a player has a completed network or not.
      **/
     public boolean networkFound(int side) {
-        return true;
+        // Use DFS to figure out a network starting from one of the GameChips in a goal
+        // Search through all of side's GameChips on board to see if both 6 have been visited &&
+        //   that another chip in the other goal post was one of these six visited chips.
+        // If not then repeat the above again starting at a different GameChip in the same goal area if there
+        //   is another one, making sure not to count another goal area chip on this side.
+        return false;
     }
 
 

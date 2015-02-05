@@ -113,11 +113,40 @@ public class MachinePlayer extends Player {
      **/
     public double evaluationFunction(GameBoard g) {
         if (g.networkFound(color)) {
-            return 10.00;
+            return 20.00;
         } else if (g.networkFound(opponentColor)) {
-            return -10.00;
+            return -20.00;
         } else {
-            return 5.00;
+            double ourScore = 0.00;
+            double opponentScore = 0.00;
+            try {
+                ListNode node = g.chips_currently_on_board.front();
+
+                for (int i = 0; i < g.chips_currently_on_board.length(); i++) {
+                    if (((GameChip) node.item()).color() == color) {
+                        ourScore += g.listOfConnectedChips((GameChip) node.item()).length();
+                    } else {
+                        opponentScore += g.listOfConnectedChips((GameChip) node.item()).length();
+                    }
+                    if (color == 1 && (((GameChip) node.item()).xPosition() == 0 | ((GameChip) node.item()).xPosition()
+                            == 7)) {
+                        ourScore++;
+                    } else if (color == 0 && (((GameChip) node.item()).yPosition() == 0 |
+                            ((GameChip) node.item()).yPosition() == 7)) {
+                        ourScore++;
+                    } else if (opponentColor == 1 && (((GameChip) node.item()).xPosition() == 0 |
+                            ((GameChip) node.item()).xPosition() == 7)) {
+                        opponentScore++;
+                    } else if (opponentColor == 0 && (((GameChip) node.item()).yPosition() == 0 |
+                            ((GameChip) node.item()).yPosition() == 7)) {
+                        opponentScore++;
+                    }
+                    node = node.next();
+                }
+            } catch (InvalidNodeException e) {
+                System.err.println(e);
+            }
+            return ourScore - opponentScore;
         }
     }
 
@@ -196,7 +225,13 @@ public class MachinePlayer extends Player {
         mp.g.recordMoveOnBoard(m2, 0);
         System.out.println("Adding back removed moves to GameBoard");
         System.out.println(mp.g.chips_currently_on_board.toString());
-        System.out.println(mp.minimaxTreeSearch(mp.g, mp.color, -1, 1).toString());
+        //System.out.println(mp.minimaxTreeSearch(mp.g, mp.color, -1, 1).toString());
+
+        System.out.println(mp.evaluationFunction(mp.g));
+
+        Move m3 = new Move(6,6);
+        mp.g.recordMoveOnBoard(m3, 1);
+        System.out.println(mp.evaluationFunction(mp.g));
     }
 
 
