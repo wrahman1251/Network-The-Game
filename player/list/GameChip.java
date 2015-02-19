@@ -15,6 +15,7 @@ public class GameChip {
     int color;
     int xPosition;
     int yPosition;
+    public boolean visited = false; // when searching for networks using DFS, this field is used as our marker.
 
     /**
      * GameChip() is the constructor for a new GameChip object which stores the color and coordinate of each GameChip
@@ -79,6 +80,13 @@ public class GameChip {
             side = "White";
         }
         return side + " GameChip @ x = " + xPosition + ", y = " + yPosition;
+    }
+
+    public boolean equals(GameChip c) {
+        if (c.color == this.color && c.xPosition == this.xPosition && c.yPosition == this.yPosition) {
+            return true;
+        }
+        return false;
     }
 
 }

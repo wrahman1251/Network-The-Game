@@ -124,9 +124,9 @@ public class MachinePlayer extends Player {
 
                 for (int i = 0; i < g.chips_currently_on_board.length(); i++) {
                     if (((GameChip) node.item()).color() == color) {
-                        ourScore += g.listOfConnectedChips((GameChip) node.item()).length();
+                        ourScore += g.listOfConnectedChips((GameChip) node.item(), 0).length();
                     } else {
-                        opponentScore += g.listOfConnectedChips((GameChip) node.item()).length();
+                        opponentScore += g.listOfConnectedChips((GameChip) node.item(), 0).length();
                     }
                     if (color == 1 && (((GameChip) node.item()).xPosition() == 0 | ((GameChip) node.item()).xPosition()
                             == 7)) {
