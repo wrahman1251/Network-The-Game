@@ -223,7 +223,7 @@ public class GameBoard {
                 // a connected chip so as to avoid finding a connected chip that does
                 // not follow the same path as the previous chip
                 if (skip != 1) {
-                    for (int i = 1; i < 9; i++) {
+                    for (int i = 1; i < 9; i++) { // checks to the right
                         if (c.xPosition() + i == ((GameChip) node.item()).xPosition() && c.yPosition() ==
                                 ((GameChip) node.item()).yPosition()) {
                             if (((GameChip) node.item()).color() == c.color()) {
@@ -237,7 +237,7 @@ public class GameBoard {
                 }
 
                 if (skip != 2) {
-                    for (int i = 1; i < 9; i++) {
+                    for (int i = 1; i < 9; i++) { // checks to the bottom
                         if (c.xPosition() == ((GameChip) node.item()).xPosition() && c.yPosition() + i ==
                                 ((GameChip) node.item()).yPosition()) {
                             if (((GameChip) node.item()).color() == c.color()) {
@@ -251,7 +251,7 @@ public class GameBoard {
                 }
 
                 if (skip != 3) {
-                    for (int i = 1; i < 9; i++) {
+                    for (int i = 1; i < 9; i++) { // checks to the left
                         if (c.xPosition() - i == ((GameChip) node.item()).xPosition() && c.yPosition() ==
                                 ((GameChip) node.item()).yPosition()) {
                             if (((GameChip) node.item()).color() == c.color()) {
@@ -265,7 +265,7 @@ public class GameBoard {
                 }
 
                 if (skip != 4) {
-                    for (int i = 1; i < 9; i++) {
+                    for (int i = 1; i < 9; i++) { // checks to the top
                         if (c.xPosition() == ((GameChip) node.item()).xPosition() && c.yPosition() - i ==
                                 ((GameChip) node.item()).yPosition()) {
                             if (((GameChip) node.item()).color() == c.color()) {
@@ -279,7 +279,7 @@ public class GameBoard {
                 }
 
                 if (skip != 5) {
-                    for (int i = 1; i < 9; i++) {
+                    for (int i = 1; i < 9; i++) { // checks to the bottom right
                         if (c.xPosition() + i == ((GameChip) node.item()).xPosition() && c.yPosition() + i ==
                                 ((GameChip) node.item()).yPosition()) {
                             if (((GameChip) node.item()).color() == c.color()) {
@@ -293,7 +293,7 @@ public class GameBoard {
                 }
 
                 if (skip !=6) {
-                    for (int i = 1; i < 9; i++) {
+                    for (int i = 1; i < 9; i++) { // checks to the top right
                         if (c.xPosition() + i == ((GameChip) node.item()).xPosition() && c.yPosition() - i ==
                                 ((GameChip) node.item()).yPosition()) {
                             if (((GameChip) node.item()).color() == c.color()) {
@@ -307,7 +307,7 @@ public class GameBoard {
                 }
 
                 if (skip != 7) {
-                    for (int i = 1; i < 9; i++) {
+                    for (int i = 1; i < 9; i++) { // checks to the bottom left
                         if (c.xPosition() - i == ((GameChip) node.item()).xPosition() && c.yPosition() + i ==
                                 ((GameChip) node.item()).yPosition()) {
                             if (((GameChip) node.item()).color() == c.color()) {
@@ -321,7 +321,7 @@ public class GameBoard {
                 }
 
                 if (skip != 8) {
-                    for (int i = 1; i < 9; i++) {
+                    for (int i = 1; i < 9; i++) { // checks to the top left
                         if (c.xPosition() - i == ((GameChip) node.item()).xPosition() && c.yPosition() - i ==
                                 ((GameChip) node.item()).yPosition()) {
                             if (((GameChip) node.item()).color() == c.color()) {
@@ -356,100 +356,30 @@ public class GameBoard {
         //   that another chip in the other goal post was one of these six visited chips.
         // If not then repeat the above again starting at a different GameChip in the same goal area if there
         //   is another one, making sure not to count another goal area chip on this side.
-        ListNode node = chips_currently_on_board.front();
-        for (int i = 0; i < chips_currently_on_board.length(); i++) {
-            ((GameChip)node.item()).visited = false;
-            node = node.next();
+        DFSPath pathObject = new DFSPath();
+        DFS DFSObject = new DFS(this, pathObject);
+
+        GameChip[] chipsInFirstGoalPost;
+        if (color == 0) {
+            chipsInFirstGoalPost = arrayOfChipsInTopGoal();
+        } else {
+            chipsInFirstGoalPost = arrayOfChipsInLeftGoal();
         }
 
-
-        boolean connectedChipInGoal1 = false;
-        boolean connectedChipInGoal2 = false;
-
-
-        node = chips_currently_on_board.front();
-        int count = 0;
-        for (int i = 0; i < chips_currently_on_board.length(); i++) {
-            if (((GameChip)node.item()).visited == true) {
-                count++;
+        int i = 0;
+        while (chipsInFirstGoalPost[i] != null) {
+            DFSObject.DFSExecute(DFSObject.newPath, chipsInFirstGoalPost[i], 0, side);
+            if (pathObject.isFound == true) {
+                return true;
             }
-        }
-
-    }
-
-    public boolean DFS(DFSPath pathObject, GameChip c, int skip, int side) {
-        pathObject.alreadyVistedChips.insertBack(c);
-
-        List edges = listOfConnectedChips(c, skip);
-        ListNode node = edges.front();
-        try {
-            for (int i = 0; i < edges.length(); i++) {
-                if (side == 0) {
-                    if (chipInBottomGoal((GameChip)node.item()) && pathObject.alreadyVistedChips.length() >= 5) {
-                        pathObject.isFound = true;
-                    } else if (chipInTopGoal((GameChip)node.item())) {
-                        // do nothing
-                    } else {
-                        // calculate new skip here
-                        DFS(pathObject, (GameChip)node.item(), skip, side);
-                    }
-                } else {
-                    if (chipInRightGoal((GameChip)node.item())) {
-                        pathObject.isFound = true;
-                    } else if (chipInLeftGoal((GameChip)node.item())) {
-                        // do nothing
-                    } else {
-                        // calculate new skip here
-                        DFS(pathObject, (GameChip)node.item(), skip, side);
-                    }
-                }
-
-                node = node.next();
-            }
-        } catch (InvalidNodeException e) {
-            System.err.println(e);
-        }
-
-        unvisitChip(DFSPath.alreadyVisitedChips, c);
-    }
-
-    private void visitChip(DList l, GameChip c) {
-        l.insertBack(c);
-    }
-
-    private void unvisitChip(DList l, GameChip c) {
-        ListNode node = l.front();
-        try {
-            for (int i = 0; i < l.length(); i++) {
-                if (((GameChip) node.item()).equals(c)) {
-                    node.remove();
-                    break;
-                }
-                node = node.next();
-            }
-        } catch (InvalidNodeException e) {
-            System.err.println(e);
-        }
-
-    }
-
-    private boolean alreadyVisited(List l, GameChip c) {
-        ListNode node = l.front();
-        try {
-            for (int i = 0; i < l.length(); i++) {
-                if (((GameChip) node.item()).equals(c)) {
-                    return true;
-                }
-                node = node.next();
-            }
-        } catch (InvalidNodeException e) {
-            System.err.println(e);
+            i++;
         }
         return false;
     }
 
+
     // returns back a list of GameChips in the left-side goal post (white)
-    private GameChip[] arrayOfChipsInLeftGoal() {
+    protected GameChip[] arrayOfChipsInLeftGoal() {
         ListNode node = chips_currently_on_board.front();
         GameChip[] chipList = new GameChip[6];
         try {
@@ -469,7 +399,7 @@ public class GameBoard {
     }
 
     // returns back a list of GameChips in the top-side goal post (black)
-    private GameChip[] arrayOfChipsInTopGoal() {
+    protected GameChip[] arrayOfChipsInTopGoal() {
         ListNode node = chips_currently_on_board.front();
         GameChip[] chipList = new GameChip[6];
         try {
@@ -488,7 +418,7 @@ public class GameBoard {
         return chipList;
     }
 
-    private GameChip[] arrayOfChipsInRightGoal() {
+    protected GameChip[] arrayOfChipsInRightGoal() {
         ListNode node = chips_currently_on_board.front();
         GameChip[] chipList = new GameChip[6];
         try {
@@ -507,7 +437,7 @@ public class GameBoard {
         return chipList;
     }
 
-    private GameChip[] arrayOfChipsInBottomGoal() {
+    protected GameChip[] arrayOfChipsInBottomGoal() {
         ListNode node = chips_currently_on_board.front();
         GameChip[] chipList = new GameChip[6];
         try {
@@ -526,55 +456,5 @@ public class GameBoard {
         return chipList;
     }
 
-    private boolean chipInBottomGoal (GameChip inputChip) {
-        for (GameChip c : arrayOfChipsInBottomGoal()) {
-            if (inputChip).equals(c) && alreadyVistedChips.length() >= 5) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private boolean chipInTopGoal (GameChip inputChip) {
-        for (GameChip c : arrayOfChipsInTopGoal()) {
-            if (inputChip).equals(c) && alreadyVistedChips.length() >= 5) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private boolean chipInRightGoal (GameChip inputChip) {
-        for (GameChip c : arrayOfChipsInRightGoal()) {
-            if (inputChip).equals(c) && alreadyVistedChips.length() >= 5) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private boolean chipInLeftGoal (GameChip inputChip) {
-        for (GameChip c : arrayOfChipsInLeftGoal()) {
-            if (inputChip).equals(c) && alreadyVistedChips.length() >= 5) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private boolean chipInThisList(List l, GameChip c) {
-        ListNode node = l.front();
-        try {
-            for (int i = 0; i < l.length(); i++) {
-                if (((GameChip) node.item()).equals(c)) {
-                    return true;
-                }
-                node = node.next();
-            }
-        } catch (InvalidNodeException e) {
-            System.err.println(e);
-        }
-        return false;
-    }
 
 }

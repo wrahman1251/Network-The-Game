@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="78f2e870-d8dd-494d-a4e7-4240b5963060" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/player/DFSPath.java" afterPath="$PROJECT_DIR$/player/DFSPath.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/player/GameBoard.java" afterPath="$PROJECT_DIR$/player/GameBoard.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/player/list/GameChip.java" afterPath="$PROJECT_DIR$/player/list/GameChip.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/player/MachinePlayer.java" afterPath="$PROJECT_DIR$/player/MachinePlayer.java" />
     </list>
     <ignored path="Network-The-Game.iws" />
@@ -40,25 +40,10 @@
       <file leaf-file-name="MachinePlayer.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/player/MachinePlayer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="3304" max-vertical-offset="3930">
-              <caret line="129" column="21" selection-start-line="129" selection-start-column="21" selection-end-line="129" selection-end-column="21" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="3274" max-vertical-offset="4335">
+              <caret line="259" column="8" selection-start-line="259" selection-start-column="8" selection-end-line="259" selection-end-column="8" />
               <folding>
                 <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GameBoard.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/player/GameBoard.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.78753996" vertical-offset="5387" max-vertical-offset="8775">
-              <caret line="392" column="50" selection-start-line="392" selection-start-column="50" selection-end-line="392" selection-end-column="50" />
-              <folding>
-                <element signature="e#536#537#0" expanded="true" />
-                <element signature="e#564#565#0" expanded="true" />
-                <element signature="e#18298#18299#0" expanded="true" />
-                <element signature="e#18329#18330#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -67,8 +52,8 @@
       <file leaf-file-name="DFSPath.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/player/DFSPath.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="240">
-              <caret line="8" column="35" selection-start-line="8" selection-start-column="35" selection-end-line="8" selection-end-column="35" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="255">
+              <caret line="9" column="12" selection-start-line="9" selection-start-column="12" selection-end-line="9" selection-end-column="12" />
               <folding />
             </state>
           </provider>
@@ -77,21 +62,34 @@
       <file leaf-file-name="DList.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/player/list/DList.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="15" max-vertical-offset="3930">
+            <state vertical-scroll-proportion="0.0" vertical-offset="2811" max-vertical-offset="3930">
               <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Move.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/player/Move.java">
+      <file leaf-file-name="GameBoard.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/player/GameBoard.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="381" max-vertical-offset="1020">
-              <caret line="8" column="56" selection-start-line="8" selection-start-column="56" selection-end-line="8" selection-end-column="56" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="3184" max-vertical-offset="6975">
+              <caret line="370" column="27" selection-start-line="370" selection-start-column="27" selection-end-line="370" selection-end-column="27" />
               <folding>
-                <element signature="e#1417#1418#0" expanded="false" />
-                <element signature="e#1442#1443#0" expanded="false" />
+                <element signature="e#536#537#0" expanded="true" />
+                <element signature="e#564#565#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DFS.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/player/DFS.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.35942492" vertical-offset="180" max-vertical-offset="3195">
+              <caret line="27" column="52" selection-start-line="27" selection-start-column="52" selection-end-line="27" selection-end-column="52" />
+              <folding>
+                <element signature="e#2060#2061#0" expanded="true" />
+                <element signature="e#2091#2092#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -100,10 +98,16 @@
       <file leaf-file-name="GameChip.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/player/list/GameChip.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="396" max-vertical-offset="1455">
+            <state vertical-scroll-proportion="0.0" vertical-offset="816" max-vertical-offset="1455">
               <caret line="88" column="21" selection-start-line="88" selection-start-column="21" selection-end-line="88" selection-end-column="21" />
               <folding>
-                <marker date="1424216700000" expanded="true" signature="2314:2481" placeholder="{...}" />
+                <element signature="imports" expanded="true" />
+                <element signature="e#1277#1278#0" expanded="true" />
+                <element signature="e#1309#1310#0" expanded="true" />
+                <element signature="e#1514#1515#0" expanded="true" />
+                <element signature="e#1546#1547#0" expanded="true" />
+                <element signature="e#2000#2001#0" expanded="true" />
+                <element signature="e#2028#2029#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -136,9 +140,10 @@
         <option value="$PROJECT_DIR$/GRADER.txt" />
         <option value="$PROJECT_DIR$/player/Best.java" />
         <option value="$PROJECT_DIR$/player/list/GameChip.java" />
-        <option value="$PROJECT_DIR$/player/MachinePlayer.java" />
         <option value="$PROJECT_DIR$/player/DFSPath.java" />
         <option value="$PROJECT_DIR$/player/GameBoard.java" />
+        <option value="$PROJECT_DIR$/player/DFS.java" />
+        <option value="$PROJECT_DIR$/player/MachinePlayer.java" />
       </list>
     </option>
   </component>
@@ -474,12 +479,12 @@
       <changelist id="78f2e870-d8dd-494d-a4e7-4240b5963060" name="Default" comment="" />
       <created>1421191015522</created>
       <updated>1421191015522</updated>
-      <workItem from="1421191015757" duration="99812000" />
+      <workItem from="1421191015757" duration="107099000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="99812000" />
+    <option name="totallyTimeSpent" value="107099000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="14" y="23" width="1260" height="736" extended-state="0" />
@@ -645,51 +650,66 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/player/list/GameChip.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="816" max-vertical-offset="1455">
-          <caret line="88" column="21" selection-start-line="88" selection-start-column="21" selection-end-line="88" selection-end-column="21" />
-          <folding>
-            <marker date="1424216700000" expanded="true" signature="2314:2481" placeholder="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/player/list/DList.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3930">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2811" max-vertical-offset="3930">
           <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/player/MachinePlayer.java">
+    <entry file="file://$PROJECT_DIR$/player/list/GameChip.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="3304" max-vertical-offset="3930">
-          <caret line="129" column="21" selection-start-line="129" selection-start-column="21" selection-end-line="129" selection-end-column="21" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="816" max-vertical-offset="1455">
+          <caret line="88" column="21" selection-start-line="88" selection-start-column="21" selection-end-line="88" selection-end-column="21" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#1277#1278#0" expanded="true" />
+            <element signature="e#1309#1310#0" expanded="true" />
+            <element signature="e#1514#1515#0" expanded="true" />
+            <element signature="e#1546#1547#0" expanded="true" />
+            <element signature="e#2000#2001#0" expanded="true" />
+            <element signature="e#2028#2029#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/player/DFSPath.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="240">
-          <caret line="8" column="35" selection-start-line="8" selection-start-column="35" selection-end-line="8" selection-end-column="35" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="255">
+          <caret line="9" column="12" selection-start-line="9" selection-start-column="12" selection-end-line="9" selection-end-column="12" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/player/GameBoard.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.78753996" vertical-offset="5387" max-vertical-offset="8775">
-          <caret line="392" column="50" selection-start-line="392" selection-start-column="50" selection-end-line="392" selection-end-column="50" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="5149" max-vertical-offset="6975">
+          <caret line="370" column="27" selection-start-line="370" selection-start-column="27" selection-end-line="370" selection-end-column="27" />
           <folding>
             <element signature="e#536#537#0" expanded="true" />
             <element signature="e#564#565#0" expanded="true" />
-            <element signature="e#18298#18299#0" expanded="true" />
-            <element signature="e#18329#18330#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/player/MachinePlayer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="3274" max-vertical-offset="4335">
+          <caret line="259" column="8" selection-start-line="259" selection-start-column="8" selection-end-line="259" selection-end-column="8" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/player/DFS.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.35942492" vertical-offset="180" max-vertical-offset="3195">
+          <caret line="27" column="52" selection-start-line="27" selection-start-column="52" selection-end-line="27" selection-end-column="52" />
+          <folding>
+            <element signature="e#2060#2061#0" expanded="true" />
+            <element signature="e#2091#2092#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -232,6 +232,33 @@ public class MachinePlayer extends Player {
         Move m3 = new Move(6,6);
         mp.g.recordMoveOnBoard(m3, 1);
         System.out.println(mp.evaluationFunction(mp.g));
+        System.out.println(mp.g.networkFound(0));
+        System.out.println(mp.g.networkFound(1));
+
+        MachinePlayer mp2 = new MachinePlayer(0);
+        Move m4 = new Move(6, 0);
+        Move m5 = new Move(6, 5);
+        Move m6 = new Move(5, 5);
+        Move m7 = new Move(3, 3);
+        Move m8 = new Move(3, 5);
+        Move m9 = new Move(5, 7);
+        mp2.g.recordMoveOnBoard(m4, 0);
+        mp2.g.recordMoveOnBoard(m5, 0);
+        mp2.g.recordMoveOnBoard(m6, 0);
+        mp2.g.recordMoveOnBoard(m7, 0);
+        mp2.g.recordMoveOnBoard(m8, 0);
+        mp2.g.recordMoveOnBoard(m9, 0);
+        System.out.println(mp2.g.networkFound(0));
+
+        mp = new MachinePlayer(0);
+        mp.g.recordMoveOnBoard(m4, 1);
+        mp.g.recordMoveOnBoard(m5, 1);
+        mp.g.recordMoveOnBoard(m6, 1);
+        mp.g.recordMoveOnBoard(m7, 1);
+        mp.g.recordMoveOnBoard(m8, 1);
+        mp.g.recordMoveOnBoard(m9, 1);
+        System.out.println(mp.g.networkFound(0));
+
     }
 
 

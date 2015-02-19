@@ -2,10 +2,11 @@
 
 package player;
 
+import player.list.*;
 
 public class DFSPath {
 
     public boolean isFound = false;
-    public List alreadyVisitedChips = new DList();
+    public DList alreadyVisitedChips = new DList();
 
 }
