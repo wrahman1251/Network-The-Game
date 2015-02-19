@@ -356,11 +356,11 @@ public class GameBoard {
         //   that another chip in the other goal post was one of these six visited chips.
         // If not then repeat the above again starting at a different GameChip in the same goal area if there
         //   is another one, making sure not to count another goal area chip on this side.
-        DFSPath pathObject = new DFSPath();
-        DFS DFSObject = new DFS(this, pathObject);
+        DFSPath pathObject;
+        DFS DFSObject;
 
         GameChip[] chipsInFirstGoalPost;
-        if (color == 0) {
+        if (side == 0) {
             chipsInFirstGoalPost = arrayOfChipsInTopGoal();
         } else {
             chipsInFirstGoalPost = arrayOfChipsInLeftGoal();
@@ -368,6 +368,8 @@ public class GameBoard {
 
         int i = 0;
         while (chipsInFirstGoalPost[i] != null) {
+            pathObject = new DFSPath();
+            DFSObject = new DFS(this, pathObject);
             DFSObject.DFSExecute(DFSObject.newPath, chipsInFirstGoalPost[i], 0, side);
             if (pathObject.isFound == true) {
                 return true;

@@ -29,9 +29,10 @@ public class DFS {
 
         try {
             for (int i = 0; i < edges.length(); i++) {
-                //if (pathObject.isFound == true) {
-                //    break;
-                //}
+                if (pathObject.isFound == true) {
+                    unvisitChip(pathObject.alreadyVisitedChips, c);
+                    break;
+                }
                 newSkip = connectedChipPathSkip(c, (GameChip)node.item());
                 if (side == 0) {
                     if (chipInBottomGoal((GameChip)node.item(), pathObject) && pathObject.alreadyVisitedChips.length() >= 5) {
