@@ -215,15 +215,17 @@ public class GameBoard {
      **/
     public List listOfConnectedChips(GameChip c, int skip) {
         List connectedChips = new DList();
-        ListNode node = chips_currently_on_board.front();
+        ListNode node;
         try {
-            for (int j = 0; j < chips_currently_on_board.length(); j++) {
-                // 8 loops going through every direction to see if there is a match.
-                // The skip number determines which direction not to look in to find
-                // a connected chip so as to avoid finding a connected chip that does
-                // not follow the same path as the previous chip
-                if (skip != 1) {
-                    for (int i = 1; i < 9; i++) { // checks to the right
+
+            // 8 loops going through every direction to see if there is a match.
+            // The skip number determines which direction not to look in to find
+            // a connected chip so as to avoid finding a connected chip that does
+            // not follow the same path as the previous chip
+            if (skip != 1) {
+                for (int i = 1; i < 9; i++) { // checks to the right
+                    node = chips_currently_on_board.front();
+                    for (int j = 0; j < chips_currently_on_board.length(); j++) {
                         if (c.xPosition() + i == ((GameChip) node.item()).xPosition() && c.yPosition() ==
                                 ((GameChip) node.item()).yPosition()) {
                             if (((GameChip) node.item()).color() == c.color()) {
@@ -233,11 +235,20 @@ public class GameBoard {
                                 break;
                             }
                         }
+                        node = node.next();
+                    }
+                    // idiot, we have two cases here. One where the loop terminates naturally
+                    // and one where the loop is terminated by "break" when a chip is found.
+                    if (node.item() != null) {
+                        break;
                     }
                 }
+            }
 
-                if (skip != 2) {
-                    for (int i = 1; i < 9; i++) { // checks to the bottom
+            if (skip != 2) {
+                for (int i = 1; i < 9; i++) { // checks to the bottom
+                    node = chips_currently_on_board.front();
+                    for (int j = 0; j < chips_currently_on_board.length(); j++) {
                         if (c.xPosition() == ((GameChip) node.item()).xPosition() && c.yPosition() + i ==
                                 ((GameChip) node.item()).yPosition()) {
                             if (((GameChip) node.item()).color() == c.color()) {
@@ -247,11 +258,18 @@ public class GameBoard {
                                 break;
                             }
                         }
+                        node = node.next();
+                    }
+                    if (node.item() != null) {
+                        break;
                     }
                 }
+            }
 
-                if (skip != 3) {
-                    for (int i = 1; i < 9; i++) { // checks to the left
+            if (skip != 3) {
+                for (int i = 1; i < 9; i++) { // checks to the left
+                    node = chips_currently_on_board.front();
+                    for (int j = 0; j < chips_currently_on_board.length(); j++) {
                         if (c.xPosition() - i == ((GameChip) node.item()).xPosition() && c.yPosition() ==
                                 ((GameChip) node.item()).yPosition()) {
                             if (((GameChip) node.item()).color() == c.color()) {
@@ -261,11 +279,18 @@ public class GameBoard {
                                 break;
                             }
                         }
+                        node = node.next();
+                    }
+                    if (node.item() != null) {
+                        break;
                     }
                 }
+            }
 
-                if (skip != 4) {
-                    for (int i = 1; i < 9; i++) { // checks to the top
+            if (skip != 4) {
+                for (int i = 1; i < 9; i++) { // checks to the top
+                    node = chips_currently_on_board.front();
+                    for (int j = 0; j < chips_currently_on_board.length(); j++) {
                         if (c.xPosition() == ((GameChip) node.item()).xPosition() && c.yPosition() - i ==
                                 ((GameChip) node.item()).yPosition()) {
                             if (((GameChip) node.item()).color() == c.color()) {
@@ -275,11 +300,18 @@ public class GameBoard {
                                 break;
                             }
                         }
+                        node = node.next();
+                    }
+                    if (node.item() != null) {
+                        break;
                     }
                 }
+            }
 
-                if (skip != 5) {
-                    for (int i = 1; i < 9; i++) { // checks to the bottom right
+            if (skip != 5) {
+                for (int i = 1; i < 9; i++) { // checks to the bottom right
+                    node = chips_currently_on_board.front();
+                    for (int j = 0; j < chips_currently_on_board.length(); j++) {
                         if (c.xPosition() + i == ((GameChip) node.item()).xPosition() && c.yPosition() + i ==
                                 ((GameChip) node.item()).yPosition()) {
                             if (((GameChip) node.item()).color() == c.color()) {
@@ -289,11 +321,18 @@ public class GameBoard {
                                 break;
                             }
                         }
+                        node = node.next();
+                    }
+                    if (node.item() != null) {
+                        break;
                     }
                 }
+            }
 
-                if (skip !=6) {
-                    for (int i = 1; i < 9; i++) { // checks to the top right
+            if (skip !=6) {
+                for (int i = 1; i < 9; i++) { // checks to the top right
+                    node = chips_currently_on_board.front();
+                    for (int j = 0; j < chips_currently_on_board.length(); j++) {
                         if (c.xPosition() + i == ((GameChip) node.item()).xPosition() && c.yPosition() - i ==
                                 ((GameChip) node.item()).yPosition()) {
                             if (((GameChip) node.item()).color() == c.color()) {
@@ -303,11 +342,18 @@ public class GameBoard {
                                 break;
                             }
                         }
+                        node = node.next();
+                    }
+                    if (node.item() != null) {
+                        break;
                     }
                 }
+            }
 
-                if (skip != 7) {
-                    for (int i = 1; i < 9; i++) { // checks to the bottom left
+            if (skip != 7) {
+                for (int i = 1; i < 9; i++) { // checks to the bottom left
+                    node = chips_currently_on_board.front();
+                    for (int j = 0; j < chips_currently_on_board.length(); j++) {
                         if (c.xPosition() - i == ((GameChip) node.item()).xPosition() && c.yPosition() + i ==
                                 ((GameChip) node.item()).yPosition()) {
                             if (((GameChip) node.item()).color() == c.color()) {
@@ -317,11 +363,18 @@ public class GameBoard {
                                 break;
                             }
                         }
+                        node = node.next();
+                    }
+                    if (node.item() != null) {
+                        break;
                     }
                 }
+            }
 
-                if (skip != 8) {
-                    for (int i = 1; i < 9; i++) { // checks to the top left
+            if (skip != 8) {
+                for (int i = 1; i < 9; i++) { // checks to the top left
+                    node = chips_currently_on_board.front();
+                    for (int j = 0; j < chips_currently_on_board.length(); j++) {
                         if (c.xPosition() - i == ((GameChip) node.item()).xPosition() && c.yPosition() - i ==
                                 ((GameChip) node.item()).yPosition()) {
                             if (((GameChip) node.item()).color() == c.color()) {
@@ -331,11 +384,14 @@ public class GameBoard {
                                 break;
                             }
                         }
+                        node = node.next();
+                    }
+                    if (node.item() != null) {
+                        break;
                     }
                 }
-
-                node = node.next();
             }
+
         } catch (InvalidNodeException e) {
             System.err.println(e);
         }
@@ -397,6 +453,7 @@ public class GameBoard {
         } catch (InvalidNodeException e) {
             System.err.println(e);
         }
+
         return chipList;
     }
 
@@ -417,6 +474,7 @@ public class GameBoard {
         } catch (InvalidNodeException e) {
             System.err.println(e);
         }
+
         return chipList;
     }
 

@@ -39,6 +39,8 @@ public class DFS {
                         pathObject.isFound = true;
                     } else if (chipInTopGoal((GameChip)node.item(), pathObject)) {
                         // do nothing
+                    } else if (alreadyVisited(pathObject.alreadyVisitedChips, (GameChip)node.item())) {
+                        // do nothing
                     } else {
                         DFSExecute(pathObject, (GameChip)node.item(), newSkip, side);
                     }
@@ -46,6 +48,8 @@ public class DFS {
                     if (chipInRightGoal((GameChip)node.item(), pathObject)) {
                         pathObject.isFound = true;
                     } else if (chipInLeftGoal((GameChip)node.item(), pathObject)) {
+                        // do nothing
+                    } else if (alreadyVisited(pathObject.alreadyVisitedChips, (GameChip)node.item())) {
                         // do nothing
                     } else {
                         DFSExecute(pathObject, (GameChip)node.item(), newSkip, side);

@@ -253,12 +253,11 @@ public class MachinePlayer extends Player {
         Move m10 = new Move(0, 1);
         Move m11 = new Move(2, 1);
         Move m12 = new Move(2, 2);
-        Move m13 = new Move(2, 6);
         Move m14 = new Move(4, 4);
         Move m15 = new Move(4, 6);
         Move m16 = new Move(6, 4);
         Move m17 = new Move(7, 5);
-        MachinePlayer mp3 = new MachinePlayer(1);
+        MachinePlayer mp3 = new MachinePlayer(0);
         mp3.g.recordMoveOnBoard(m10, 1);
         mp3.g.recordMoveOnBoard(m11, 1);
         mp3.g.recordMoveOnBoard(m12, 1);
@@ -266,7 +265,10 @@ public class MachinePlayer extends Player {
         mp3.g.recordMoveOnBoard(m15, 1);
         mp3.g.recordMoveOnBoard(m16, 1);
         mp3.g.recordMoveOnBoard(m17, 1);
-        System.out.println(mp.g.networkFound(1));
+        System.out.println(mp3.g.networkFound(1));
+        Move m13 = new Move(3, 3);
+        mp3.g.recordMoveOnBoard(m13, 0);
+        System.out.println(mp3.g.networkFound(1));
 
     }
 
