@@ -20,7 +20,6 @@ public class DFS {
 
     public void DFSExecute(DFSPath pathObject, GameChip c, int skip, int side) {
         int newSkip;
-        pathObject.alreadyVisitedChips.insertBack(c);
 
         List edges = g.listOfConnectedChips(c, skip);
         ListNode node = edges.front();
@@ -36,6 +35,7 @@ public class DFS {
                 newSkip = connectedChipPathSkip(c, (GameChip)node.item());
                 if (side == 0) {
                     if (chipInBottomGoal((GameChip)node.item(), pathObject) && pathObject.alreadyVisitedChips.length() >= 5) {
+                        System.out.println(pathObject.alreadyVisitedChips.length());
                         pathObject.isFound = true;
                     } else if (chipInTopGoal((GameChip)node.item(), pathObject)) {
                         // do nothing
@@ -45,7 +45,7 @@ public class DFS {
                         DFSExecute(pathObject, (GameChip)node.item(), newSkip, side);
                     }
                 } else {
-                    if (chipInRightGoal((GameChip)node.item(), pathObject)) {
+                    if (chipInRightGoal((GameChip)node.item(), pathObject) && pathObject.alreadyVisitedChips.length() >= 5) {
                         pathObject.isFound = true;
                     } else if (chipInLeftGoal((GameChip)node.item(), pathObject)) {
                         // do nothing
