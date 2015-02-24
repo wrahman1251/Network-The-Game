@@ -11,12 +11,14 @@ import java.lang.System;
  *  made by both players.  Can select a move for itself.
  */
 public class MachinePlayer extends Player {
-    int recursionDepthCounter = 0;
 
     int color;
     int opponentColor;
     int searchDepth;
     protected GameBoard g;
+
+    public static final double MACHINE_WIN = 20.00;
+    public static final double HUMAN_WIN = -20.00;
 
   // Creates a machine player with the given color.  Color is either 0 (black)
   // or 1 (white).  (White has the first move.)
@@ -47,6 +49,16 @@ public class MachinePlayer extends Player {
   // Returns a new move by "this" player.  Internally records the move (updates
   // the internal game board) as a move by "this" player.
   public Move chooseMove() {
+      Move ourMove = minimaxTreeSearch(g, color, HUMAN_WIN, MACHINE_WIN, 0).move;
+      if (g.isValidMove(ourMove, color)) {
+          g.recordMoveOnBoard(ourMove, color);
+          return ourMove;
+      } else {
+          System.out.println("That move was caught by isValidMove() as invalid");
+          return new Move();
+      }
+
+      /*
       List list = g.listOfValidMoves(); // From the internal GameBoard, gets a list of possible moves player can make
       try {
           if (list.front().isValidNode()) {
@@ -60,6 +72,7 @@ public class MachinePlayer extends Player {
       }
 
       return new Move();
+      */
   } 
 
   // If the Move m is legal, records the move as a move by the opponent
@@ -94,8 +107,13 @@ public class MachinePlayer extends Player {
         for (int i = 0; i < g.chips_currently_on_board.length(); i++) {
             try {
                 if (((GameChip) node.item()).xPosition() == m.x1 && ((GameChip) node.item()).yPosition() == m.y1) {
-                    node.remove();
-                    break;
+                    if (m.moveKind == Move.STEP) {
+                        ((GameChip) node.item()).setPositionOfChip(m.x2, m.y2);
+                        break;
+                    } else {
+                        node.remove();
+                        break;
+                    }
                 }
                 node = node.next();
             } catch (InvalidNodeException e) {
@@ -113,9 +131,9 @@ public class MachinePlayer extends Player {
      **/
     public double evaluationFunction(GameBoard g) {
         if (g.networkFound(color)) {
-            return 20.00;
+            return MACHINE_WIN;
         } else if (g.networkFound(opponentColor)) {
-            return -20.00;
+            return HUMAN_WIN;
         } else {
             double ourScore = 0.00;
             double opponentScore = 0.00;
@@ -157,48 +175,57 @@ public class MachinePlayer extends Player {
      *          should make next in order to increase its odds of winning.
      * @return a Move object that the MachinePlayer will use as its next move.
      **/
-    public Best minimaxTreeSearch(GameBoard g, int side, double alpha, double beta) {
-
+    public Best minimaxTreeSearch(GameBoard g, int side, double alpha, double beta, int accumulator) {
+        // use a helper function in which the recursion works on this helper function itself
+        // and the current depth of the recursion is counted as an accumulator in this function.
+        // we can stick depth in as the accumulator parameter each time recursion is called
+        // with the value of accumulator reducing by one each time until it is 0. That's when we
+        // stop the recursion by not allowing the function to be called recursively if the value
+        // is 0 (or maybe less than 0?).
         Best myBest = new Best();
         Best reply;
-        if (g.networkFound(0) | g.networkFound(1)) {
-            myBest.score = evaluationFunction(g);
-            return myBest;
+        if (g.networkFound(0) || g.networkFound(1)) {
+            return new Best(evaluationFunction(g));
         }
-        if (color == side) {
+
+        if (side == color) {
             myBest.score = alpha;
         } else {
             myBest.score = beta;
         }
+
+
+        if (accumulator == searchDepth) {
+            return new Best(evaluationFunction(g));
+        }
+
+
         try {
             myBest.move = (Move) g.listOfValidMoves().front().item();
             ListNode node = g.listOfValidMoves().front();
-            while (recursionDepthCounter <= searchDepth) {
-                for (int i = 0; i < g.listOfValidMoves().length(); i++) {
-                    forceMove((Move) node.item());
-                    recursionDepthCounter++;
-                    reply = minimaxTreeSearch(g, opponentColor, alpha, beta); // how do we incorporate recursive depth here?
-                    undoMove((Move) node.item());
-                    if (side == color && reply.score > myBest.score) {
-                        myBest.move = (Move) node.item();
-                        myBest.score = reply.score;
-                        alpha = reply.score;
-                    } else if (side == opponentColor && reply.score < myBest.score) {
-                        myBest.move = (Move) node.item();
-                        myBest.score = reply.score;
-                        beta = reply.score;
-                    }
-                    if (alpha >= beta) {
-                        return myBest;
-                    }
 
-                    node = node.next();
+            for (int i = 0; i < g.listOfValidMoves().length(); i++) {
+                g.recordMoveOnBoard((Move) node.item(), side);
+                reply = minimaxTreeSearch(g, getOpponentColor(side), alpha, beta, accumulator+1);
+                undoMove((Move) node.item());
+                if (side == color && reply.score > myBest.score) {
+                    myBest.move = (Move) node.item();
+                    myBest.score = reply.score;
+                    alpha = reply.score;
+                } else if (side == getOpponentColor(side) && reply.score < myBest.score) {
+                    myBest.move = (Move) node.item();
+                    myBest.score = reply.score;
+                    beta = reply.score;
                 }
+                if (alpha >= beta) {
+                    return myBest;
+                }
+
+                node = node.next();
             }
         } catch (InvalidNodeException e) {
             System.err.println(e);
         }
-        recursionDepthCounter = 0;
         return myBest;
     }
 
@@ -272,6 +299,14 @@ public class MachinePlayer extends Player {
 
     }
 
+
+    private int getOpponentColor(int color) {
+        if (color == 0) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
 
 }
 

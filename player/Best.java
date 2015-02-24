@@ -13,7 +13,15 @@ public class Best {
 
     }
 
-    public Best(Move move, int score) {
+    public Best(Move m) {
+        move = m;
+    }
+
+    public Best(double score) {
+        this.score = score;
+    }
+
+    public Best(Move move, double score) {
         this.move = move;
         this.score = score;
     }
